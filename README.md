@@ -20,6 +20,7 @@ was delivered. It reads events. It does not control locks, because the Ring API 
 - Sandbox live-view sims: Package, Vehicle, Motion. `button_press` is in the docs but cannot be tested in the sandbox.
 - No lock / access-control endpoint anywhere.
 - Sandbox video is unreliable: first sim showed video, every later one was a black box; DELETE session returned 503 (a teammate #205). Do not depend on sandbox video.
+- Event History works in the sandbox (Joy, 2026-09-29): `GET /v1/history/devices/{id}/events` returned 4 `history-events` (each: attributes x4, relationships x2, meta x1). Event types inside not yet read.
 - Real event types (console session): webhook `motion_detected` (sub_type motion/human/vehicle/other_motion), `button_press`, `contact_sensor_faulted/cleared`. History: `GET /v1/history/devices/{id}/events?event_types=ding,motion.vehicle`. There is NO package event in the API docs.
 - Calls must be server-to-server (CORS blocks browsers).
 - Real app tokens (access ~4h, refresh ~30d) need Create app: 4 HTTPS endpoints, privacy policy, ToS, ID verification. Skipped unless needed.
