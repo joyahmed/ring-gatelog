@@ -26,3 +26,5 @@ One entry per snag: task, steps, expected vs actual, severity, workaround, sugge
 - **Hypothesis (Joy):** video plays only ONCE per token. Fits the data: the first run after a fresh token played (Package, twice on two tokens); later runs on the same token were black. To test: fresh token -> run Vehicle FIRST. If it plays, the rule is "first play per token", not "Package only".
 
 - **CONFIRMED (Joy, fresh token, Vehicle first):** Vehicle played. So it is not Package-only. Working rule: **the first live-view sim after a new token plays; later ones on the same token are black.** Not seen in any docs. Severity medium: silent failure, no error in the UI. Suggestion: return an error or a message when a token has used its one playback, or lift the limit.
+
+- **Third confirmation (Joy, fresh token, Motion first):** Motion played ("Birds on Feeders" by Vimeo user Michael Black, CC BY 4.0 - credit if shown). All three clips play as the first sim on a fresh token: Package, Vehicle, Motion. Rule holds: **one playable live-view per token.**

@@ -19,7 +19,7 @@ was delivered. It reads events. It does not control locks, because the Ring API 
 - Playground token: 30 min, scope `ava.v1:read` only. `GET api.amazonvision.com/v1/devices` returns 1 simulated device.
 - Sandbox live-view sims: Package, Vehicle, Motion. `button_press` is in the docs but cannot be tested in the sandbox.
 - No lock / access-control endpoint anywhere.
-- Sandbox video: the FIRST live-view sim after a fresh token plays (Package and Vehicle both confirmed); later sims on the same token are black and DELETE session returns 503. For a demo: new token, play once. Package clip is CC BY 4.0 by YouTube user frollard - credit it if shown.
+- Sandbox video: the FIRST live-view sim after a fresh token plays (Package, Vehicle and Motion all confirmed); later sims on the same token are black and DELETE session returns 503. For a demo: new token, play one clip. Credits (CC BY 4.0) if shown: Package = YouTube user frollard, Motion = Vimeo user Michael Black.
 - Event History works in the sandbox (Joy, 2026-09-29): `GET /v1/history/devices/{id}/events` returned 4 `history-events` (each: attributes x4, relationships x2, meta x1). Event types inside not yet read.
 - Real event types (console session): webhook `motion_detected` (sub_type motion/human/vehicle/other_motion), `button_press`, `contact_sensor_faulted/cleared`. History: `GET /v1/history/devices/{id}/events?event_types=ding,motion.vehicle`. There is NO package event in the API docs.
 - Calls must be server-to-server (CORS blocks browsers).
