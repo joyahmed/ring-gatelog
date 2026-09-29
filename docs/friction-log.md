@@ -22,3 +22,5 @@ One entry per snag: task, steps, expected vs actual, severity, workaround, sugge
 - **Update (same night):** tried again in a private window; still black. `POST .../whep/sessions` returns 201 Created + SDP answer + Location header every time, so session setup works; only playback fails. Ruled out: expired token, leftover session, browser profile/extensions.
 
 - **Update 16:20 UTC:** Package sim played video (frame shows "Thief stealing our package", 2026/09/29 16:20:39 UTC overlay). So playback is INTERMITTENT, not dead. Pattern so far: Package has played twice; Motion and Vehicle have only ever been black. Unverified whether it is per-clip or random. Clip credit shown in console: "Thief stealing our package" by YouTube user frollard, CC BY 4.0 - attribute it if it appears in our video.
+
+- **Hypothesis (Joy):** video plays only ONCE per token. Fits the data: the first run after a fresh token played (Package, twice on two tokens); later runs on the same token were black. To test: fresh token -> run Vehicle FIRST. If it plays, the rule is "first play per token", not "Package only".
