@@ -18,3 +18,5 @@ One entry per snag: task, steps, expected vs actual, severity, workaround, sugge
 - **Actual:** `GET /v1/history/devices/{id}/events` returned 4 events; the first is `on_demand` (our own live-view run at the time of the test). No way found to make the sandbox emit `motion_detected`, `vehicle` or `button_press`.
 - **Severity:** high for any event-driven app.
 - **Suggestion:** add "emit test event" buttons to Playground, including a webhook delivery test.
+
+- **Update (same night):** tried again in a private window; still black. `POST .../whep/sessions` returns 201 Created + SDP answer + Location header every time, so session setup works; only playback fails. Ruled out: expired token, leftover session, browser profile/extensions.
