@@ -30,3 +30,5 @@ One entry per snag: task, steps, expected vs actual, severity, workaround, sugge
 - **Third confirmation (Joy, fresh token, Motion first):** Motion played ("Birds on Feeders" by Vimeo user Michael Black, CC BY 4.0 - credit if shown). All three clips play as the first sim on a fresh token: Package, Vehicle, Motion. Rule holds: **one playable live-view per token.**
 
 - **CORRECTION (Joy, ~16:30 UTC):** Package, then Vehicle, then Motion all played again, several runs in a row. So "one playable video per token" is WRONG. The black screens were earlier and are unexplained; best guess is a temporary Ring backend fault (the 503s on DELETE and /metrics point that way). Unverified. Playback has been reliable from about 16:20 UTC on.
+
+- **Another possible cause (Joy):** a teammate reloaded the browser, and video worked after that. Against it: the teammate's earlier fresh page load and Joy's private-window test both stayed black. So the cause is still unknown. Candidates: temporary Ring backend fault, or stale page state that only some reloads clear. To be safe when recording: reload the console, fresh token, one clip per take.
