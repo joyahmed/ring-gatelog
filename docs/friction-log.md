@@ -20,3 +20,5 @@ One entry per snag: task, steps, expected vs actual, severity, workaround, sugge
 - **Suggestion:** add "emit test event" buttons to Playground, including a webhook delivery test.
 
 - **Update (same night):** tried again in a private window; still black. `POST .../whep/sessions` returns 201 Created + SDP answer + Location header every time, so session setup works; only playback fails. Ruled out: expired token, leftover session, browser profile/extensions.
+
+- **Update 16:20 UTC:** Package sim played video (frame shows "Thief stealing our package", 2026/09/29 16:20:39 UTC overlay). So playback is INTERMITTENT, not dead. Pattern so far: Package has played twice; Motion and Vehicle have only ever been black. Unverified whether it is per-clip or random. Clip credit shown in console: "Thief stealing our package" by YouTube user frollard, CC BY 4.0 - attribute it if it appears in our video.
