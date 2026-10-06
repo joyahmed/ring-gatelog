@@ -4,15 +4,17 @@ export function Section({
   title,
   note,
   className = "",
+  testId,
   children,
 }: {
+  testId?: string;
   title: string;
   note?: ReactNode;
   className?: string;
   children: ReactNode;
 }) {
   return (
-    <section className={`card rounded-2xl border border-line bg-card p-4 shadow-sm sm:p-5 ${className}`}>
+    <section data-testid={testId} className={`card rounded-2xl border border-line bg-card p-4 shadow-sm sm:p-5 ${className}`}>
       <header className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 className="text-sm font-semibold tracking-tight">{title}</h2>
         {note && <p className="text-xs text-muted">{note}</p>}

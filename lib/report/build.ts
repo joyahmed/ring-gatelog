@@ -133,6 +133,12 @@ function findLeftOpen(events: GateEvent[], endMs: number): LeftOpenIncident[] {
   return out;
 }
 
+/** Every hour holding the day's maximum, so a tie names all of them. Empty day = []. */
+export function busiestHours(hourly: number[]): number[] {
+  const max = Math.max(0, ...hourly);
+  return max ? hourly.flatMap((n, h) => (n === max ? [h] : [])) : [];
+}
+
 const plural = (n: number, one: string, many = one + "s") => `${n} ${n === 1 ? one : many}`;
 
 function summarize(r: Omit<GateReport, "summary">, time: (iso: string) => string): string[] {
@@ -148,8 +154,14 @@ function summarize(r: Omit<GateReport, "summary">, time: (iso: string) => string
   ].filter(Boolean);
   if (parts.length) s.push(`Seen at the gate: ${parts.join(", ")}.`);
   if (r.visitors.length) s.push(`${plural(r.visitors.length, "visitor")} rang the bell at the door.`);
-  const busiest = r.hourly.indexOf(Math.max(...r.hourly));
-  s.push(`Busiest hour: ${String(busiest).padStart(2, "0")}:00 with ${plural(r.hourly[busiest], "event")}.`);
+  const top = busiestHours(r.hourly);
+  const names = top.map((h) => `${String(h).padStart(2, "0")}:00`);
+  const list = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : names[0];
+  s.push(
+    top.length > 1
+      ? `Busiest hours: ${list} with ${plural(r.hourly[top[0]], "event")} each.`
+      : `Busiest hour: ${list} with ${plural(r.hourly[top[0]], "event")}.`,
+  );
   for (const i of r.leftOpen)
     s.push(
       i.closedAt

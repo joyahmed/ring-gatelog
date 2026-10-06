@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import type { GateEvent, GateEventKind } from "../events/types";
-import { buildReport, localMidnight } from "./build";
+import { buildReport, busiestHours, localMidnight } from "./build";
 import { addDays, localDay, localTime } from "./time";
 
 const TZ = "Asia/Dhaka"; // UTC+6, no DST
@@ -170,5 +170,18 @@ describe("summary", () => {
     expect(text).toContain("1 night event");
     expect(text).toContain("Busiest hour: 10:00 with 3 events.");
     expect(text.toLowerCase()).not.toMatch(/deliver|package|parcel/);
+  });
+
+  test("busiest hours that tie are all named", () => {
+    const r = report([
+      ev("vehicle", "08:05"),
+      ev("vehicle", "08:20"),
+      ev("human", "12:00"),
+      ev("vehicle", "18:10"),
+      ev("vehicle", "18:25"),
+    ]);
+    expect(busiestHours(r.hourly)).toEqual([8, 18]);
+    expect(r.summary.join(" ")).toContain("Busiest hours: 08:00 and 18:00 with 2 events each.");
+    expect(busiestHours(Array(24).fill(0))).toEqual([]);
   });
 });

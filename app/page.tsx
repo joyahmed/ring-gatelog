@@ -8,6 +8,7 @@ import { HourlyChart } from "./components/HourlyChart";
 import { ReportHeader } from "./components/ReportHeader";
 import { Section } from "./components/Section";
 import { SummaryText, SummaryTiles } from "./components/SummaryTiles";
+import { Verdict } from "./components/Verdict";
 
 export const dynamic = "force-dynamic";
 
@@ -23,10 +24,14 @@ async function ringStatus(): Promise<{ devices: string[]; error?: string }> {
 
 function ReplayNotice({ replayed, total }: { replayed: number; total: number }) {
   return (
-    <p className="card rounded-xl border border-warn/40 bg-warn-soft px-4 py-2.5 text-sm text-warn">
-      <strong className="font-semibold">Demo data.</strong>{" "}
-      {replayed === total ? "Every event on this day is" : `${replayed} of ${total} events on this day are`} a replayed
-      scripted gate day, not real gate traffic. Each event is tagged with its source.
+    <p className="card flex items-baseline gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm text-muted">
+      <span className="size-2 shrink-0 translate-y-[-1px] rounded-full bg-warn" aria-hidden />
+      <span>
+      <strong className="font-semibold text-fg">Demo data.</strong>{" "}
+      {replayed === total
+        ? "Every event on this day comes from a replayed scripted gate day, not real gate traffic."
+        : `${replayed} of ${total} events on this day come from a replayed scripted gate day, not real gate traffic. Each event is tagged with its source.`}
+      </span>
     </p>
   );
 }
@@ -43,6 +48,7 @@ export default async function Page({ searchParams }: PageProps<"/">) {
   const api = await ringStatus();
   const gate = api.devices.join(", ") || report.devices.join(", ") || process.env.GATE_NAME || "Gate";
   const replayed = report.events.filter((e) => e.source === "replay").length;
+  const showSource = new Set(report.events.map((e) => e.source)).size > 1;
   const next = day < today ? addDays(day, 1) : null;
 
   return (
@@ -55,6 +61,7 @@ export default async function Page({ searchParams }: PageProps<"/">) {
         <EmptyState days={listDays(tz)} />
       ) : (
         <>
+          <Verdict report={report} tz={tz} />
           <SummaryTiles report={report} />
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 print:grid-cols-1">
             <Section title="Summary" className="lg:col-span-2">
@@ -64,15 +71,16 @@ export default async function Page({ searchParams }: PageProps<"/">) {
               title="Activity by hour"
               note={`First ${localTime(report.firstAt!, tz)} · last ${localTime(report.lastAt!, tz)}`}
               className="lg:col-span-3"
+              testId="report-chart"
             >
-              <HourlyChart hourly={report.hourly} />
+              <HourlyChart report={report} tz={tz} />
             </Section>
           </div>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 print:grid-cols-1">
-            <Flagged report={report} tz={tz} />
-            <Visitors report={report} tz={tz} />
+            <Flagged report={report} tz={tz} showSource={showSource} />
+            <Visitors report={report} tz={tz} showSource={showSource} />
           </div>
-          <Timeline events={report.events} tz={tz} />
+          <Timeline events={report.events} report={report} tz={tz} showSource={showSource} />
         </>
       )}
 

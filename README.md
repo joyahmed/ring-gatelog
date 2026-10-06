@@ -26,8 +26,32 @@ was delivered. It reads events. It does not control locks, because the Ring API 
 - Real app tokens (access ~4h, refresh ~30d) need Create app: 4 HTTPS endpoints, privacy policy, ToS, ID verification. Skipped unless needed.
 - Sample: github.com/AmazonAppDev/ring-api-helloworld (Next.js 15 + Python).
 
+## Run it
+
+Needs bun 1.4+ (and Node 24 for Next.js).
+
+```
+bun install
+cp .env.example .env.local          # RING_MODE=replay works with no token
+bun run build
+RING_WEBHOOK_SECRET=demo-local-secret bun run start -p 3100
+# second terminal: send one scripted gate day through the signed webhook
+RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --url http://localhost:3100/api/ring/webhook
+# open http://localhost:3100/?day=2026-10-06
+```
+
+- `RING_MODE=live` + `RING_TOKEN=<Playground token>` calls the real Ring API (`/v1/devices`, `/v1/history/devices/{id}/events`).
+- `RING_MODE=record` does the same and saves each response to `fixtures/recorded/`, so `replay` can run later with no token.
+- `POST /api/ring/webhook` takes Ring webhook payloads, checks `X-Signature` (HMAC-SHA256 of the raw body). `POST /api/ring/sync` pulls event history (needs `x-sync-key` in production).
+- Replayed demo events are tagged `replay` and the page says "Demo data" - they are never shown as real gate traffic.
+- Tests: `bun test`. Plan: `docs/PLAN.md`. Ring API facts: `docs/ring-api-spec.md`.
+- Demo video: made with [video-kit](https://github.com/joyahmed/video-kit) (private) from `video/shots.mjs`.
+
+![Report, desktop](docs/shots/1440-light.png)
+
 ## Status
 
-Scaffolded 2026-09-29. No code yet. Friction log is being kept in `docs/friction-log.md`.
+- 2026-10-06: Gate 2 loop works with replayed data: event -> signed webhook -> store -> report on screen. 70 tests pass.
+- Not yet: one live call with a real Playground token (needs Joy to log in to the Ring console).
 
-The earlier AWS CDS idea was dropped (needs a registered company and a Facebook business profile). Plan kept in `docs/aws-cds-plan-ABANDONED.md`.
+Friction log: `docs/friction-log.md`. The earlier AWS CDS idea was dropped (needs a registered company and a Facebook business profile). Plan kept in `docs/aws-cds-plan-ABANDONED.md`.

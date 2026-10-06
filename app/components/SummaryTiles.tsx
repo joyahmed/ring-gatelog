@@ -9,19 +9,19 @@ export function SummaryTiles({ report: r }: { report: GateReport }) {
     { label: "Vehicles", value: r.vehicles.length, icon: "car" },
     { label: "Visitors", value: r.visitors.length, icon: "bell" },
     { label: "Gate opens", value: r.totals.gate_open, icon: "open" },
-    { label: "Flags", value: flags, icon: "alert", alert: flags > 0 },
+    { label: "Flagged", value: flags, icon: "alert", alert: flags > 0 },
   ];
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <ul data-testid="report-summary" className="grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-6 print:grid-cols-6 print:gap-2">
       {tiles.map((t) => (
         <li
           key={t.label}
-          className={`card rounded-2xl border bg-card p-4 shadow-sm ${t.alert ? "border-warn/50" : "border-line"}`}
+          className={`card rounded-2xl border bg-card p-3 shadow-sm sm:p-4 print:p-2.5 ${t.alert ? "border-warn/50" : "border-line"}`}
         >
-          <div className={`flex items-center gap-1.5 text-xs font-medium ${t.alert ? "text-warn" : "text-muted"}`}>
+          <div className={`flex items-center gap-1 truncate text-xs font-medium ${t.alert ? "text-warn" : "text-muted"}`}>
             <Icon name={t.icon} className="size-3.5" /> {t.label}
           </div>
-          <p className={`mt-1 text-3xl font-semibold tabular-nums tracking-tight ${t.alert ? "text-warn" : ""}`}>{t.value}</p>
+          <p className={`mt-1 text-2xl font-semibold sm:text-3xl print:text-2xl tabular-nums tracking-tight ${t.alert ? "text-warn" : ""}`}>{t.value}</p>
         </li>
       ))}
     </ul>
