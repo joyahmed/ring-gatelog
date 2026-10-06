@@ -1,0 +1,306 @@
+{
+ "_comment": "One scripted day at a Dhaka housing-society gate. Times are local GATE_TZ clock times; scripts/replay-day.ts fills real timestamps. Envelope = Ring webhook v1.1 (docs/ring-api-spec.md section 4). Device ids are made up.",
+ "tz": "Asia/Dhaka",
+ "devices": {
+  "cam": {
+   "id": "ava1.ring.device.GATECAM01",
+   "name": "Main Gate"
+  },
+  "sensor": {
+   "id": "ava1.ring.device.GATESENS01",
+   "name": "Gate Contact Sensor"
+  }
+ },
+ "account_id": "ava1.ring.account.DEMOGATE",
+ "template": {
+  "meta": {
+   "version": "1.1",
+   "time": "{iso}",
+   "request_id": "{request_id}",
+   "account_id": "{account_id}"
+  },
+  "data": {
+   "id": "{device_id}_{id_part}_{timestamp}",
+   "type": "{type}",
+   "attributes": {
+    "source": "{device_id}",
+    "source_type": "devices",
+    "timestamp": "{timestamp}",
+    "timestamp_readable": "{readable}",
+    "sub_type": "{sub_type}"
+   },
+   "relationships": {
+    "devices": {
+     "links": {
+      "self": "/v1/devices/{device_id}"
+     }
+    }
+   }
+  }
+ },
+ "template_notes": "timestamp_readable and sub_type only on motion_detected. id_part = sub_type for motion, else the type (button_press, contact_sensor_faulted, contact_sensor_cleared).",
+ "events": [
+  {
+   "t": "02:15:20",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "05:50:10",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "motion"
+  },
+  {
+   "t": "06:12:30",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "07:10:12",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "07:42:40",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "07:45:10",
+   "device": "sensor",
+   "type": "contact_sensor_faulted"
+  },
+  {
+   "t": "07:46:05",
+   "device": "sensor",
+   "type": "contact_sensor_cleared"
+  },
+  {
+   "t": "08:05:33",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "08:20:05",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "08:47:51",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "09:12:18",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "09:30:00",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "09:30:50",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "10:05:22",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "motion"
+  },
+  {
+   "t": "11:15:10",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "11:15:48",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "12:00:40",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "12:30:44",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "12:40:00",
+   "device": "sensor",
+   "type": "contact_sensor_faulted"
+  },
+  {
+   "t": "12:41:30",
+   "device": "sensor",
+   "type": "contact_sensor_cleared"
+  },
+  {
+   "t": "13:02:00",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "13:02:25",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "13:45:12",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "other_motion"
+  },
+  {
+   "t": "14:05:09",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "14:40:37",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "motion"
+  },
+  {
+   "t": "15:05:00",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "15:07:30",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "15:10:00",
+   "device": "sensor",
+   "type": "contact_sensor_faulted"
+  },
+  {
+   "t": "15:35:20",
+   "device": "sensor",
+   "type": "contact_sensor_cleared"
+  },
+  {
+   "t": "16:20:30",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "16:21:10",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "17:35:27",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "17:58:03",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "18:00:30",
+   "device": "sensor",
+   "type": "contact_sensor_faulted"
+  },
+  {
+   "t": "18:01:20",
+   "device": "sensor",
+   "type": "contact_sensor_cleared"
+  },
+  {
+   "t": "18:10:40",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "18:25:16",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "18:30:20",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "18:50:55",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "19:15:30",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "19:40:08",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "vehicle"
+  },
+  {
+   "t": "20:10:15",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "20:11:05",
+   "device": "cam",
+   "type": "button_press"
+  },
+  {
+   "t": "21:30:48",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "other_motion"
+  },
+  {
+   "t": "22:15:05",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  },
+  {
+   "t": "23:40:15",
+   "device": "cam",
+   "type": "motion_detected",
+   "sub_type": "human"
+  }
+ ]
+}

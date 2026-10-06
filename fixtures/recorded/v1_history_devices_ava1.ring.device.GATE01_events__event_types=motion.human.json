@@ -1,0 +1,42 @@
+{
+  "_note": "shaped from docs, replace by running RING_MODE=record",
+  "data": [
+    {
+      "type": "history-events",
+      "id": "gate01-motion-600000",
+      "attributes": {
+        "event_type": "motion",
+        "is_third_party_reviewed": false,
+        "start": 1791100600000,
+        "end": 1791100620000
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.GATE01"
+          }
+        }
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "gate01-motion-120000",
+      "attributes": {
+        "event_type": "motion",
+        "is_third_party_reviewed": false,
+        "start": 1791100120000,
+        "end": 1791100140000
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.GATE01"
+          }
+        }
+      }
+    }
+  ],
+  "links": {}
+}

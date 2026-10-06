@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* Semantic tokens: components use these, dark mode redefines them once. */
+:root {
+  --bg: #f6f8f9;
+  --card: #ffffff;
+  --fg: #0f1c24;
+  --muted: #5b6b77;
+  --line: #e2e8ec;
+  --accent: #0d8079;
+  --accent-soft: #e2f4f2;
+  --accent-fg: #ffffff;
+  --warn: #b45309;
+  --warn-soft: #fdf3e2;
+  --night: #4f46e5;
+  --night-soft: #eceefe;
+  --night-band: #eef1f8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1418;
+    --card: #111e24;
+    --fg: #e6eef1;
+    --muted: #93a5af;
+    --line: #213139;
+    --accent: #2dbdb2;
+    --accent-soft: #0f2f2e;
+    --accent-fg: #04201e;
+    --warn: #f0a94a;
+    --warn-soft: #33240f;
+    --night: #a5b0fb;
+    --night-soft: #1d2142;
+    --night-band: #142028;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-night: var(--night);
+  --color-night-soft: var(--night-soft);
+  --color-night-band: var(--night-band);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* A4 committee report: light, no chrome, sections never split mid-card. */
+@page {
+  size: A4;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  :root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --fg: #0f1c24;
+    --muted: #4a5963;
+    --line: #cfd8dd;
+    --accent: #0d8079;
+    --accent-soft: #e2f4f2;
+    --warn: #9a4a06;
+    --warn-soft: #fdf3e2;
+    --night: #4338ca;
+    --night-soft: #eceefe;
+    --night-band: #f1f3f8;
+  }
+  html {
+    color-scheme: light;
+  }
+  body {
+    font-size: 10.5pt;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .card {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .timeline li {
+    break-inside: avoid;
+  }
+}
