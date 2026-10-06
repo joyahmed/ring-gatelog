@@ -1,0 +1,13 @@
+{
+  "_comment": "Demo devices for replayed gate-day webhooks. Independent of fixtures/recorded/v1_devices.json (record mode overwrites that).",
+  "data": [
+    {
+      "id": "ava1.ring.device.GATECAM01",
+      "name": "Main Gate"
+    },
+    {
+      "id": "ava1.ring.device.GATESENS01",
+      "name": "Gate Contact Sensor"
+    }
+  ]
+}

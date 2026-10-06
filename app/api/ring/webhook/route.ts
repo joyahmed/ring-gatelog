@@ -1,4 +1,5 @@
 import { appendEvents } from "../../../../lib/events/store";
+import demoDevices from "../../../../fixtures/demo-devices.json";
 import { listDevices } from "../../../../lib/ring/client";
 import { normalizeWebhook } from "../../../../lib/ring/normalize";
 import { verifySignature } from "../../../../lib/ring/signature";
@@ -15,12 +16,16 @@ let names: { at: number; map: Map<string, string> } | null = null;
 async function deviceNames(): Promise<Map<string, string>> {
   if (names && Date.now() - names.at < NAMES_TTL_MS) return names.map;
   const map = new Map<string, string>();
+  // Demo names come from fixtures/demo-devices.json; live names (below) win on a clash.
+  let live = false;
+  for (const d of demoDevices.data) map.set(d.id, d.name);
   try {
     for (const d of await listDevices()) if (d.name) map.set(d.id, d.name);
+    live = true;
   } catch {
     // names are cosmetic; retry soon instead of failing the webhook
   }
-  names = { at: Date.now() - (map.size ? 0 : NAMES_TTL_MS - 30_000), map };
+  names = { at: Date.now() - (live ? 0 : NAMES_TTL_MS - 30_000), map };
   return map;
 }
 

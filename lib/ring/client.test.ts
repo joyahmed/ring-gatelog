@@ -40,10 +40,10 @@ describe("replay (seeded fixtures, no token, no network)", () => {
     }) as unknown as typeof fetch;
     expect(ringMode()).toBe("replay");
     const devs = await listDevices();
-    expect(devs.length).toBe(3);
-    expect(devs.map((d) => d.name)).toContain("Main Gate");
-    const h = (await getHistory("ava1.ring.device.GATE01", "motion.human")) as { data: unknown[] };
-    expect(h.data.length).toBe(2);
+    expect(devs.length).toBe(1);
+    expect(devs.map((d) => d.name)).toContain("Playground Device");
+    const h = (await getHistory(devs[0].id, "motion.human")) as { data: unknown[] };
+    expect(h.data.length).toBe(14);
   });
   test("missing fixture gives a clear error", async () => {
     process.env.RING_FIXTURE_DIR = tmp;

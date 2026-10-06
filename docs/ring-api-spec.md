@@ -98,7 +98,9 @@ SOURCE: DOC "Event History > Response (200 OK)". Values in `<...>` are the docs'
 }
 ```
 - Attributes: exactly 4 (`event_type`, `is_third_party_reviewed`, `start`, `end`; start/end are epoch ms numbers). `id` is opaque; do not parse.
-- DISCREPANCY with the brief: DOC shows ONE relationship (`source`) and NO `meta` on history. If the live sandbox returns 2 relationships and `meta`, that is not documented; capture a real response before trusting the DOC. The live sandbox response is unverified here.
+- **VERIFIED LIVE 2026-10-06** (recorded in `fixtures/recorded/`, Playground Device). Real row: `{type, id, attributes:{is_third_party_reviewed, start, event_type, end}, relationships:{source, cv_detections}, meta:{riid:null}}`; top-level keys only `["data"]` (no `links.next` on the 14-row response). The DOC shows ONE relationship (`source`) and NO `meta`; the live sandbox has 2 relationships and `meta`. Trust the live shape.
+- **VERIFIED LIVE 2026-10-06: the sandbox IGNORES `event_types`.** `motion.human`, `motion.vehicle`, `motion.other_motion`, `motion`, `ding` and `on_demand` all returned the same 14 rows, all `event_type: "on_demand"`. GateLog therefore never trusts the filter: rows whose `event_type` does not match the requested top-level type are dropped, a motion row seen under more than one sub-type filter becomes kind `motion`, and sync reports `filterIgnored`.
+- `relationships.cv_detections`: in all 14 recorded rows it is `{"data": []}` (empty). Presumably computer-vision detections (person/vehicle?) per event; the item shape is unknown, so nothing is built on it yet. Re-check on a row from a real motion event; it may be the missing human/vehicle sub-type source.
 - Event types (DOC): `motion` (subtypes `motion.human`, `motion.vehicle`, `motion.animal`, `motion.other_motion`), `on_demand`, `ding`. Note history subtype names include `animal`; the webhook sub_type list does not (below).
 - Pagination: follow `links.next` verbatim (prepend base URL); absent = last page. Empty: `{"data": [], "links": {"next": "..."}}` (the doc shows `next` even when empty).
 - `event_type` is plain (`motion`); the subtype is NOT shown in `attributes` in the doc example. INFERRED: GateLog cannot read human/vehicle from history rows; it can only filter by `event_types=motion.human`.
@@ -194,4 +196,4 @@ SOURCE: SAMPLE lib/schemas/webhook.ts, app/api/webhook/test/route.ts. Meta has o
 1. Use section 4 payloads and section 3 history shape; set `meta.time` = ISO of `attributes.timestamp`.
 2. Sign replayed webhooks: `X-Signature: sha256=` + hex HMAC-SHA256(rawBody, key). Test against raw bytes.
 3. Sandbox facts from the brief (1 device, 4 history events, 30 min token, CORS = server-side only) are not in the DOC or sample; keep them labelled "from brief".
-4. Open gaps: live history response (2 relationships + meta?) not verified; snapshot second search mode, video download body, capabilities/configurations/location/users-me response shapes not read.
+4. Open gaps: live history shape now verified (2026-10-06), but `cv_detections` item shape and a motion row are not seen; snapshot second search mode, video download body, capabilities/configurations/location/users-me response shapes not read.

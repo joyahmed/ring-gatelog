@@ -1,0 +1,340 @@
+{
+  "data": [
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.Q7D766X3BRHBIW5GOXE3LRSVGUBP4S2EY3UC2MNTAFEMHOH7ERD2LFES7S2BF2IW2WPK6YGRRFHEJI25JXUL5BGDGO6TWB57",
+      "attributes": {
+        "end": 1790699383635,
+        "is_third_party_reviewed": true,
+        "start": 1790699343923,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.X2W6R6UHRODBTG4B2BMWSWWPA6FUWS2VIWVOV7YCNG7EV24EFKUJNHB3XYQDHYDORRMB2273STTHYP3CK4RFOPF7FRIIKWTQ",
+      "attributes": {
+        "event_type": "on_demand",
+        "start": 1790699314399,
+        "is_third_party_reviewed": true,
+        "end": 1790699336159
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.5P6CDQG5GWRHKAO2HJXUZBS7YK6GNXV54SDR4OZK6QZN4JODUM4R7JVYA7ZOWNXUCRDRNLLJJVS22HUIH3XZEOXDKWVNAGFI",
+      "attributes": {
+        "event_type": "on_demand",
+        "is_third_party_reviewed": true,
+        "start": 1790699278479,
+        "end": 1790699284302
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.OWFW4YURBQ62RFMPALFETH2GCZLIOTQIOUAUM57TXF6EDVV6LEN4QG225PFD56BXJ7C2IV5XDP722MAKCOG3VU6E2XW4MLMW",
+      "attributes": {
+        "end": 1790699054963,
+        "start": 1790699015249,
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.2PLR22XR6EKNEIJPQ2Q2OUJW3EQULTDISBQUQU7D4VFYPVDARP2ILCL53AV3MYBSAM3UYQZMZTCA56BJ5HVIMSZEW77BPQZR",
+      "attributes": {
+        "is_third_party_reviewed": true,
+        "end": 1790698989339,
+        "start": 1790698967579,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.N4OKRZZ2Q2L3JSEHQJXSWYPVFENV4ACG2MICLOUJFVNGZPZZ4PLMAJSEYYXNNEGQNQDK5APFFLVPPTBFF2B4PSMNYW56VDPT",
+      "attributes": {
+        "event_type": "on_demand",
+        "is_third_party_reviewed": true,
+        "start": 1790698836119,
+        "end": 1790698867859
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.AWXK2IS4AXAM64HIPEIOGL4YNT4M27XL6QDWPQ7YLBES7557KJ6R7UAEH7EU45BZ3C7M7QYLTS5AP2ZWGCI7OGILHYTGIKQQ",
+      "attributes": {
+        "end": 1790698341265,
+        "start": 1790698320053,
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.MALTBBD46EXAFNJC27TXDHKMR2MFN6FG5FD7BSJXCLQYFYIENEC2ADJ7DR6BSLQACRGKNMAPSU34QZC65SZ6INEEGCEU2L3B",
+      "attributes": {
+        "start": 1790698273909,
+        "end": 1790698293738,
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.CTUHBXUNDZRUCHZQJLRJ7YAF2GWBJTURMSM6HGWIBFKUDIVDVV4E4UIMW5JYLQGWP5TAFR7TCV3GP2UOZ2U2DLBDN3RDWFSZ",
+      "attributes": {
+        "event_type": "on_demand",
+        "end": 1790698225198,
+        "start": 1790698204317,
+        "is_third_party_reviewed": true
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.QTNB3H7N5UGGKMCEIFX44AFRJSYUA23R5CZISHKYX6DCHXPXY3VEV6VU6QO5LGMML2H23LQXRTSV2LT4WEQ4NHRV2JF355KR",
+      "attributes": {
+        "start": 1790698172196,
+        "end": 1790698179171,
+        "event_type": "on_demand",
+        "is_third_party_reviewed": true
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.V3EAJEVYJQPWJD7KOAEMNLZ37MO7V3OQZDRNPEQSN3CJ4LI2GBM4ZOMMKGYECFFNCW5CXZK56MVNZIVGFE4JMH55I62XXTLI",
+      "attributes": {
+        "event_type": "on_demand",
+        "end": 1790697735925,
+        "is_third_party_reviewed": true,
+        "start": 1790697715755
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.Z4W5IRIK35OFCDGFCVJZTGFLMXXFOWC4OVE6AIC4RNK2MFPBRSI2OZJ5QKNGYFPIUN776JBLIDUNJ6QI5WZ4MZF26WEBGMIK",
+      "attributes": {
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand",
+        "start": 1790697615294,
+        "end": 1790697628117
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.D4MKHDCPDJAWAQFOERXXLXJAP7GGMOUXKL7IDPWP63N4CBTQ6AC7HA3KLJ2ZAJA3XV55VPY4BHFSO4OVYILCJPO4XUWLNPUP",
+      "attributes": {
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand",
+        "start": 1790697565947,
+        "end": 1790697581842
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.XSA6FD3QZW3FNDWQZFYYMZJJLS332ZI6XOFED5CJHFZ7Z3N7YDZD5TLJCYHXAUECPW6HS5S7ZLS5Y6EYHRX56NHWJBNHREAB",
+      "attributes": {
+        "is_third_party_reviewed": true,
+        "end": 1790697172387,
+        "start": 1790697161890,
+        "event_type": "on_demand"
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    }
+  ]
+}

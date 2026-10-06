@@ -3,6 +3,7 @@ import { appendEvents, listDays, readEvents } from "../../../../lib/events/store
 import type { GateEvent } from "../../../../lib/events/types";
 import { getHistory, listDevices, ringGet, ringMode } from "../../../../lib/ring/client";
 import { HISTORY_TYPES, MAX_PAGES, splitNext } from "../../../../lib/ring/fixtures";
+import { ambiguousIds, countMismatched, topType } from "../../../../lib/ring/history";
 import { normalizeHistory } from "../../../../lib/ring/normalize";
 
 export const dynamic = "force-dynamic";
@@ -46,29 +47,19 @@ export async function POST(req: Request) {
       return (known.get(`${e.deviceId}|${e.kind}`) ?? []).some((x) => Math.abs(x - t) <= DEDUPE_MS);
     };
 
+    let filterIgnored = false;
     for (const d of devices) {
-      let cutoff = -Infinity; // oldest time reached by a subtype pass that hit MAX_PAGES
+      // Pass 1: fetch every filter's pages. The sandbox ignores event_types, so rows of the wrong
+      // type are dropped here (their own pass picks them up).
+      const passes: { t: (typeof HISTORY_TYPES)[number]; events: GateEvent[]; truncated: boolean }[] = [];
       for (const t of HISTORY_TYPES) {
-        const bare = t.eventTypes === "motion";
-        const fresh: GateEvent[] = [];
-        let oldest = Infinity;
+        const events: GateEvent[] = [];
         let truncated = false;
         try {
           let page: unknown = await getHistory(d.id, t.eventTypes);
           for (let i = 0; ; i++) {
-            const events = normalizeHistory(page, { deviceId: d.id, deviceName: d.name, kind: t.kind });
-            for (const ev of events) {
-              oldest = Math.min(oldest, Date.parse(ev.at));
-              if (bare && Date.parse(ev.at) < cutoff) continue;
-              const key = `${ev.deviceId}|${ev.id}`;
-              if (seen.has(key)) continue;
-              seen.add(key);
-              if (isDup(ev)) {
-                dropped++;
-                continue;
-              }
-              fresh.push(ev);
-            }
+            if (countMismatched(page, t.eventTypes) > 0) filterIgnored = true;
+            events.push(...normalizeHistory(page, { deviceId: d.id, deviceName: d.name, kind: t.kind, eventType: topType(t.eventTypes) }));
             const rows = (page as { data?: unknown[] }).data ?? [];
             const next = (page as { links?: { next?: string } }).links?.next;
             if (!next || rows.length === 0) break;
@@ -84,14 +75,42 @@ export async function POST(req: Request) {
           if (mode === "replay" && (e as { status?: number }).status === 404) continue;
           throw e;
         }
+        passes.push({ t, events, truncated });
+      }
+      // A motion row returned for more than one sub-type filter: the filter was ignored, kind "motion".
+      const ambiguous = ambiguousIds(passes.map((p) => ({ kind: p.t.kind, events: p.events })));
+      if (ambiguous.size) filterIgnored = true;
+
+      let cutoff = -Infinity; // oldest time reached by a subtype pass that hit MAX_PAGES
+      for (const { t, events, truncated } of passes) {
+        const bare = t.eventTypes === "motion";
+        const fresh: GateEvent[] = [];
+        let oldest = Infinity;
+        for (const ev of events) {
+          oldest = Math.min(oldest, Date.parse(ev.at));
+          if (bare && Date.parse(ev.at) < cutoff) continue;
+          if (ambiguous.has(`${ev.deviceId}|${ev.id}`)) ev.kind = "motion";
+          const key = `${ev.deviceId}|${ev.id}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          if (isDup(ev)) {
+            dropped++;
+            continue;
+          }
+          fresh.push(ev);
+        }
         if (truncated && !bare && Number.isFinite(oldest)) cutoff = Math.max(cutoff, oldest);
-        const r = appendEvents(fresh);
-        fresh.forEach(remember);
-        perType[t.eventTypes] = (perType[t.eventTypes] ?? 0) + r.added;
-        added += r.added;
+        // Count what was really added, per resulting kind (not per filter asked).
+        for (const kind of new Set(fresh.map((e) => e.kind))) {
+          const group = fresh.filter((e) => e.kind === kind);
+          const r = appendEvents(group);
+          group.forEach(remember);
+          perType[kind] = (perType[kind] ?? 0) + r.added;
+          added += r.added;
+        }
       }
     }
-    return Response.json({ mode, devices: devices.length, added, dropped, perType });
+    return Response.json({ mode, devices: devices.length, added, dropped, perType, filterIgnored });
   } catch (e) {
     console.error("sync failed", e);
     const status = (e as { status?: number }).status === 401 ? 401 : 502;

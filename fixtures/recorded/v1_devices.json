@@ -1,71 +1,53 @@
 {
-  "_note": "shaped from docs, replace by running RING_MODE=record",
-  "meta": {
-    "time": "2026-10-06T08:00:00Z"
-  },
   "data": [
     {
       "type": "devices",
-      "id": "ava1.ring.device.GATE01",
+      "id": "ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW",
       "attributes": {
-        "name": "Front Gate Camera"
+        "name": "Playground Device",
+        "image_url": "https://app-content.ring.com/shared/images/devices/square_device_images/DoorbellPro/rvdp_3x.png"
       },
       "relationships": {
-        "status": {
-          "data": {
-            "type": "device-status",
-            "id": "ava1.ring.device.status.GATE01"
-          },
-          "links": {
-            "related": "/v1/devices/ava1.ring.device.GATE01/status"
-          }
-        },
         "location": {
           "data": {
             "type": "locations",
-            "id": "5ecd04ff-3d93-4a6e-80e4-035f735a58e4"
+            "id": "ava1.ring.location.E7WNIUM62K3MXWTFONUKBUBFVVYMKT54QIQCPJ5GTA445QSDKBIC4HVR5N3PZTZ73Y7RGBBXOGFT2WREYSGGA3HFPJ4QEVIQYVCXEBHHKYOQPWUPXOTZLUSPIU"
           },
           "links": {
-            "related": "/v1/devices/ava1.ring.device.GATE01/location"
+            "related": "/v1/devices/ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW/location"
           }
-        }
-      }
-    },
-    {
-      "type": "devices",
-      "id": "ava1.ring.device.GATECAM01",
-      "attributes": {
-        "name": "Main Gate"
-      },
-      "relationships": {
+        },
         "status": {
           "data": {
             "type": "device-status",
-            "id": "ava1.ring.device.status.GATECAM01"
+            "id": "ava1.ring.device.status.DYVEXXCU25LFAVLILJMC4TSNW6J7XBPZGWP6JFJX75QN2QQN4RVSKQTZADFKHB6UAAFAXV6ZYM45QA3SAZ26CSMNHMELCFAE"
           },
           "links": {
-            "related": "/v1/devices/ava1.ring.device.GATECAM01/status"
+            "related": "/v1/devices/ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW/status"
           }
-        }
-      }
-    },
-    {
-      "type": "devices",
-      "id": "ava1.ring.device.GATESENS01",
-      "attributes": {
-        "name": "Gate Contact Sensor"
-      },
-      "relationships": {
-        "status": {
+        },
+        "capabilities": {
           "data": {
-            "type": "device-status",
-            "id": "ava1.ring.device.status.GATESENS01"
+            "type": "device-capabilities",
+            "id": "ava1.ring.device.capabilities.VSJQYONUEKTW6FZGQV65CW74IMBVVEUYHWD4LZMOGUQ4OMXAPGFROB6C4JJS5HGGRQ4DVIZDNYKLDN5MI7OICXCOSJISN2DN"
           },
           "links": {
-            "related": "/v1/devices/ava1.ring.device.GATESENS01/status"
+            "related": "/v1/devices/ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW/capabilities"
+          }
+        },
+        "configurations": {
+          "data": {
+            "type": "device-configurations",
+            "id": "ava1.ring.device.configurations.FQ53LV5GQEIQU3UBBA7YBZKMOVMHPID3V5T2DKS7H7DKBSWT36ZRJ2AAYNR76E6RURKAHA36S44KWMUN656IVY6VUQIOWDXKKWSGWRE5OJGAKWOSTGE6LEBV4I"
+          },
+          "links": {
+            "related": "/v1/devices/ava1.ring.device.NNQFDQLFU56FF2BQUAZRSMFBJ4M2YWHNRDUMEDRWFSW4IM5ELG43YZD5E4UY4DXNFCSEHV577CW7JY2VJWXHL54LN2WSBWMW/configurations"
           }
         }
       }
     }
-  ]
+  ],
+  "meta": {
+    "time": "2026-10-06T12:50:49Z"
+  }
 }

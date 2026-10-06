@@ -8,7 +8,7 @@ const join = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(", ")} a
 const n = (k: number, one: string, many = one + "s") => `${k} ${k === 1 ? one : many}`;
 
 /** The five-second answer: did anything need attention at the gate today, and what else happened. */
-export function Verdict({ report: r, tz }: { report: GateReport; tz: string }) {
+export function Verdict({ report: r, tz, isToday }: { report: GateReport; tz: string; isToday: boolean }) {
   const incidents = r.leftOpen;
   const alert = incidents.length > 0;
   const headline = alert
@@ -37,7 +37,7 @@ export function Verdict({ report: r, tz }: { report: GateReport; tz: string }) {
       </span>
       <div className="min-w-0">
         <p className={`text-xs font-semibold uppercase tracking-wider ${alert ? "text-warn" : "text-accent"}`}>
-          {alert ? `${n(incidents.length, "incident")} today` : "All clear today"}
+          {`${alert ? n(incidents.length, "incident") : "All clear"}${isToday ? " today" : " this day"}`}
         </p>
         <p className="mt-1 text-xl font-semibold tracking-tight text-balance sm:text-2xl">{headline}</p>
         <p className="mt-1.5 text-sm text-muted">

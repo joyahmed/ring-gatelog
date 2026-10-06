@@ -61,7 +61,7 @@ export default async function Page({ searchParams }: PageProps<"/">) {
         <EmptyState days={listDays(tz)} />
       ) : (
         <>
-          <Verdict report={report} tz={tz} />
+          <Verdict report={report} tz={tz} isToday={day === today} />
           <SummaryTiles report={report} />
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 print:grid-cols-1">
             <Section title="Summary" className="lg:col-span-2">

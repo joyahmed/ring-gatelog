@@ -71,16 +71,17 @@ export function normalizeWebhook(payload: unknown, source: GateEventSource = "we
   };
 }
 
-/** Ring history-events body (JSON:API) -> GateEvents. `opts.kind` overrides plain `motion` rows only. */
+/** Ring history-events body (JSON:API) -> GateEvents. `opts.kind` overrides plain `motion` rows only. `opts.eventType` drops rows of any other event_type. */
 export function normalizeHistory(
   body: unknown,
-  opts: { deviceId: string; deviceName?: string; kind?: GateEventKind },
+  opts: { deviceId: string; deviceName?: string; kind?: GateEventKind; eventType?: string },
 ): GateEvent[] {
   const rows = Array.isArray(body) ? body : isObj(body) && Array.isArray(body.data) ? body.data : [];
   const out: GateEvent[] = [];
   for (const row of rows) {
     if (!isObj(row) || !isObj(row.attributes)) continue;
     const a = row.attributes;
+    if (opts.eventType && a.event_type !== opts.eventType) continue;
     const at = toIso(a.start);
     if (!at) continue;
     let deviceId = opts.deviceId;
