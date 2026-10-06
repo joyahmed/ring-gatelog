@@ -65,10 +65,10 @@ body {
   font-feature-settings: "cv11", "ss01";
 }
 
-/* A4 committee report: light, no chrome, sections never split mid-card. */
+/* A4 committee report: ONE page, light, no chrome, sections never split mid-card. */
 @page {
   size: A4;
-  margin: 14mm 12mm;
+  margin: 9mm 10mm;
 }
 
 @media print {
@@ -103,6 +103,126 @@ body {
     break-inside: avoid;
   }
   .verdict {
-    padding: 12px 16px !important;
+    padding: 8px 12px !important;
+    gap: 10px !important;
+  }
+  .verdict > span:first-child {
+    width: 30px;
+    height: 30px;
+  }
+  .verdict h2,
+  .verdict p.text-xl {
+    font-size: 13pt !important;
+    margin-top: 0 !important;
+  }
+
+  /* One page: tighter rhythm everywhere. */
+  main {
+    gap: 7px !important;
+  }
+  main > header {
+    gap: 4px !important;
+    padding-bottom: 6px !important;
+  }
+  main > header h1,
+  main > header .text-2xl {
+    font-size: 15pt !important;
+    margin-top: 2px !important;
+  }
+  main > p.card {
+    padding: 3px 10px !important;
+    font-size: 8pt !important;
+  }
+  .card.rounded-2xl {
+    padding: 7px 10px !important;
+    border-radius: 10px !important;
+  }
+  .card header {
+    margin-bottom: 4px !important;
+  }
+  main > ul.grid .card,
+  main > ul.grid > li {
+    padding: 5px 8px !important;
+  }
+  main > ul.grid .text-2xl {
+    font-size: 15pt !important;
+    margin-top: 0 !important;
+  }
+
+  /* Summary beside the chart; flagged beside visitors. */
+  main > div.grid {
+    gap: 7px !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  main > div.grid:has([data-testid="report-chart"]) {
+    grid-template-columns: 2fr 3fr !important;
+  }
+  main > div.grid ul.space-y-1\.5 {
+    font-size: 8pt;
+    line-height: 1.35;
+  }
+  main > div.grid ul.space-y-1\.5 > * + * {
+    margin-top: 2px !important;
+  }
+  [data-testid="report-chart"] .h-40 {
+    height: 70px !important;
+  }
+  [data-testid="report-chart"] .mt-3 {
+    margin-top: 4px !important;
+    font-size: 7pt !important;
+  }
+
+  /* Flagged and visitor rows: one compact line each. */
+  [data-testid="report-flagged"] li,
+  [data-testid="report-visitors"] li {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    gap: 6px !important;
+  }
+  [data-testid="report-flagged"] li .size-8,
+  [data-testid="report-visitors"] li .size-6,
+  [data-testid="report-visitors"] li .size-8 {
+    width: 18px;
+    height: 18px;
+  }
+  [data-testid="report-flagged"] li p,
+  [data-testid="report-visitors"] li p,
+  [data-testid="report-flagged"] li time,
+  [data-testid="report-visitors"] li time {
+    font-size: 7.5pt !important;
+    line-height: 1.25;
+  }
+  [data-testid="report-flagged"] .space-y-3 > * + * {
+    margin-top: 4px !important;
+  }
+
+  /* Full timeline: four dense columns. */
+  [data-testid="report-timeline"] ol {
+    columns: 4 !important;
+    column-gap: 14px !important;
+  }
+  [data-testid="report-timeline"] li {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    gap: 5px !important;
+    font-size: 7.5pt !important;
+  }
+  [data-testid="report-timeline"] li time {
+    width: 30px;
+  }
+  [data-testid="report-timeline"] li > span.size-6 {
+    width: 14px;
+    height: 14px;
+  }
+  [data-testid="report-timeline"] li svg {
+    width: 9px;
+    height: 9px;
+  }
+  [data-testid="report-timeline"] li .text-xs {
+    font-size: 6.5pt !important;
+  }
+  main > footer {
+    padding-top: 0 !important;
+    font-size: 6.5pt !important;
   }
 }
