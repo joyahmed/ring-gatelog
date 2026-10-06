@@ -52,6 +52,7 @@ RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --u
 ## Status
 
 - 2026-10-06: Gate 2 loop works with replayed data: event -> signed webhook -> store -> report on screen. 70 tests pass.
-- Not yet: one live call with a real Playground token (needs Joy to log in to the Ring console).
+- 2026-10-06: live sandbox run done (1 device, 14 real events), real responses saved in `fixtures/recorded/`. Sandbox ignores `event_types` - handled.
+- 2026-10-06: demo video v1 cut (1:45, captions only), kept outside the repo in `../ring-gatelog-video/`. Open: voice or captions, Open Source vs AWS Builder mini.
 
 Friction log: `docs/friction-log.md`. The earlier AWS CDS idea was dropped (needs a registered company and a Facebook business profile). Plan kept in `docs/aws-cds-plan-ABANDONED.md`.
