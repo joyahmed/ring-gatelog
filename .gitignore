@@ -43,3 +43,6 @@ next-env.d.ts
 
 # GateLog event store (local, never committed)
 /data/
+
+# Joy voice script - kept local, never pushed
+docs/voice-script.md
