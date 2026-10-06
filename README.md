@@ -45,7 +45,7 @@ RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --u
 - `POST /api/ring/webhook` takes Ring webhook payloads, checks `X-Signature` (HMAC-SHA256 of the raw body). `POST /api/ring/sync` pulls event history (needs `x-sync-key` in production).
 - Replayed demo events are tagged `replay` and the page says "Demo data" - they are never shown as real gate traffic.
 - Tests: `bun test`. Plan: `docs/PLAN.md`. Ring API facts: `docs/ring-api-spec.md`.
-- Demo video: made with [video-kit](https://github.com/joyahmed/video-kit) (private) from `video/shots.mjs`.
+- Demo video: made with [video-kit](https://github.com/joyahmed/video-kit) (open source, MIT) from `video/shots.mjs`.
 
 ![Report, desktop](docs/shots/1440-light.png)
 
