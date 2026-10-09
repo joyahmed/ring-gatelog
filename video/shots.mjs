@@ -25,7 +25,7 @@ export default {
   steps: [
     // 1. Title + problem
     { do: 'card', kicker: 'Ring track · Build, Ship, Shape hackathon', title: 'GateLog - a daily gate report from Ring events',
-      sub: 'Housing-society committees never know who came through the gate, when, or whether it was left open.', ms: 7000 },
+      sub: 'The guard keeps a paper register. The committee never really sees who came through the gate, or when.', ms: 7000 },
 
     // 2. Real Ring API, early
     { do: 'card', kicker: 'Real Ring API response', title: 'GET /api/ring/status', titleSize: 64, codeTitle: 'GateLog server → Ring API GET /v1/devices',
@@ -55,7 +55,7 @@ export default {
     { do: 'goto', url: DEMO, ms: 1000 },
     { do: 'caption', text: '6 Oct demo day: the report opens with the verdict', ms: 4500 },
     { do: 'highlight', selector: '[data-testid="report-verdict"]', ms: 4500 },
-    { do: 'caption', text: 'The gate was left open 25 minutes, 15:10 to 15:35', ms: 4500 },
+    { do: 'caption', text: 'Example: gate open 25 min - flagged at the top. Normal days: empty.', ms: 4500 },
     { do: 'highlight', selector: '[data-testid="report-verdict"]', ms: 4500 },
     { do: 'caption', text: 'The day in six numbers', ms: 4000 },
     { do: 'highlight', selector: '[data-testid="report-summary"]', ms: 4000 },
@@ -71,13 +71,13 @@ export default {
     { do: 'caption', text: 'And every event, oldest first', ms: 4000 },
     { do: 'highlight', selector: '[data-testid="report-timeline"]', ms: 4000 },
 
-    // 5. Phone + dark mode
-    { do: 'device', url: DEMO, width: 390, height: 844, zoom: 0.79, label: 'Phone, 390 px wide', note: 'Read it at the gate or in the committee chat.', ms: 500 },
-    { do: 'caption', text: 'Works at phone width', ms: 4500 },
+    // 5. Guard's phone + night shift
+    { do: 'device', url: DEMO, width: 390, height: 844, zoom: 0.79, label: 'Phone, 390 px wide', note: 'The guard checks it right at the gate.', ms: 500 },
+    { do: 'caption', text: 'On the guard\'s phone, at the gate', ms: 4500 },
     { do: 'wait', ms: 1500 },
     { do: 'scroll', frame: true, selector: '[data-testid="report-chart"]', offset: 16, dur: 1800, ms: 3000 },
     { do: 'media', colorScheme: 'dark', ms: 500 },
-    { do: 'caption', text: 'Dark mode follows the phone', ms: 4500 },
+    { do: 'caption', text: 'Night shift: follows the phone\'s dark mode', ms: 4500 },
     { do: 'scroll', frame: true, selector: '[data-testid="report-visitors"]', offset: 16, dur: 1800, ms: 5000 },
 
     // 6. Print view
