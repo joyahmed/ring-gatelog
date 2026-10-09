@@ -22,6 +22,10 @@ day 2026-10-06 tz Asia/Dhaka: 46 payloads, sent 46 ok, 0 failed, signed
 export default {
   viewport: { width: 1920, height: 1080 },
   scale: 1.3333, // page lays out at 1440x810 CSS px, captured sharp at 1920x1080
+  // Own look, not video-kit's default teal: a warm gate light glowing on night slate. Record with --captions off
+  // (the voice-over tells the story; the caption box covered the report). Captions still go to the .srt.
+  bg: 'radial-gradient(1100px 680px at 18% 8%,#7c4a12 0%,#2a1d14 38%,#0c1117 72%)',
+  accent: '#fbbf24',
   steps: [
     // 1. Title + problem
     { do: 'card', kicker: 'Ring track · Build, Ship, Shape hackathon', title: 'GateLog - a daily gate report from Ring events',
