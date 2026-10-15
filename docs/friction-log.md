@@ -2,8 +2,6 @@
 
 One entry per snag: task, steps, expected vs actual, severity, workaround, suggestion.
 
-(a teammate is drafting entries from the console session; merge them here.)
-
 ## Entry: Playground live-view video is black (2026-09-29)
 - **Task:** watch the canned Package / Vehicle / Motion clips in Playground step 3.
 - **Steps:** generate token, click a sim, wait. Repeated by two people, fresh token, fresh page load.
