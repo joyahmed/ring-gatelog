@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Joy voice script - kept local, never pushed
 docs/voice-script.md
+
+# Session notes live in the private memory repo, never in this public repo
+docs/ai-memory/
