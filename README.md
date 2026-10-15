@@ -14,13 +14,13 @@ was delivered. It reads events. It does not control locks, because the Ring API 
 | Demo | Ring Playground simulator is allowed by the rules |
 | Repo rule | Must call the Ring API at runtime. Public + licence, or private + shared with testing@devpost.com and 6 Amazon reviewers |
 
-## Known facts (from Joy's console, 2026-09-29)
+## Ring API facts we checked (Ring developer console, from 2026-09-29)
 
 - Playground token: 30 min, scope `ava.v1:read` only. `GET api.amazonvision.com/v1/devices` returns 1 simulated device.
 - Sandbox live-view sims: Package, Vehicle, Motion. `button_press` is in the docs but cannot be tested in the sandbox.
 - No lock / access-control endpoint anywhere.
 - Sandbox video: was black on most runs from about 15:30 to 16:15 UTC on 2026-09-29 (DELETE session and /metrics returned 503), reliable again from about 16:20 UTC - cause unknown: a temporary Ring-side fault, or stale page state cleared by a reload. Not a per-token rule. When recording: reload, fresh token, one clip per take. Credits (CC BY 4.0) if shown: Package = YouTube user frollard, Motion = Vimeo user Michael Black.
-- Event History works in the sandbox (Joy, 2026-09-29): `GET /v1/history/devices/{id}/events` returned 4 `history-events` (each: attributes x4, relationships x2, meta x1). Event types inside not yet read.
+- Event History works in the sandbox: `GET /v1/history/devices/{id}/events` returns `history-events` (attributes, relationships, meta). Live run 2026-10-06: 14 `on_demand` (live-view) events, and every `event_types` filter returned the same 14 rows - the sandbox ignores the filter.
 - Real event types (console session): webhook `motion_detected` (sub_type motion/human/vehicle/other_motion), `button_press`, `contact_sensor_faulted/cleared`. History: `GET /v1/history/devices/{id}/events?event_types=ding,motion.vehicle`. There is NO package event in the API docs.
 - Calls must be server-to-server (CORS blocks browsers).
 - Real app tokens (access ~4h, refresh ~30d) need Create app: 4 HTTPS endpoints, privacy policy, ToS, ID verification. Skipped unless needed.
