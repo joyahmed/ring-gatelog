@@ -45,7 +45,7 @@ RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --u
 - `POST /api/ring/webhook` takes Ring webhook payloads, checks `X-Signature` (HMAC-SHA256 of the raw body). `POST /api/ring/sync` pulls event history (needs `x-sync-key` in production).
 - Replayed demo events are tagged `replay` and the page says "Demo data" - they are never shown as real gate traffic.
 - Tests: `bun test`. Plan: `docs/PLAN.md`. Ring API facts: `docs/ring-api-spec.md`.
-- Demo video: made with [video-kit](https://github.com/joyahmed/video-kit) (open source, MIT) from `video/shots.mjs`.
+- Demo video: https://youtu.be/vSqTdbO6Nyo - a real screen recording: a clip played on the Ring Playground camera becomes a new live-view row in GateLog, pulled from the Ring API. The first cut was made with [video-kit](https://github.com/joyahmed/video-kit) (open source, MIT) from `video/shots.mjs`.
 
 ![Report, desktop](docs/shots/1440-light.png)
 
@@ -54,5 +54,6 @@ RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --u
 - 2026-10-06: Gate 2 loop works with replayed data: event -> signed webhook -> store -> report on screen. 70 tests pass.
 - 2026-10-06: live sandbox run done (1 device, 14 real events), real responses saved in `fixtures/recorded/`. Sandbox ignores `event_types` - handled.
 - 2026-10-06: demo video v1 cut (1:45, captions only), kept outside the repo in `../ring-gatelog-video/`. Open: voice or captions, Open Source vs AWS Builder mini.
+- 2026-10-22: demo video re-recorded with live footage: Playground clips (Package, Vehicle, Motion) logged by Ring as `on_demand` history rows and synced into GateLog in live mode within about a minute.
 
 Friction log: `docs/friction-log.md`. The earlier AWS CDS idea was dropped (needs a registered company and a Facebook business profile).
