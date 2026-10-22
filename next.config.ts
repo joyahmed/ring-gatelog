@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Keeps the "N" dev badge out of screen recordings.
+  devIndicators: false,
 };
 
 export default nextConfig;
