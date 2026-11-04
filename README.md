@@ -1,59 +1,128 @@
+<div align="center">
+
 # GateLog
 
-Entry for the Ring track of [Build, Ship, Shape: Amazon Developer Hackathon](https://amazonappdev2026.devpost.com/).
+**A daily gate report built from Ring camera events.**<br>
+Who came to the gate, when, and whether it was left open, on one page you can print.
 
-**Idea:** an event log for a gate (housing society, office). Ring camera events (motion, package,
-vehicle, doorbell press) become a daily report for the management committee: who came, when, what
-was delivered. It reads events. It does not control locks, because the Ring API has no lock endpoint.
+[![Hackathon entry](https://img.shields.io/badge/hackathon-Ring%20track-0f766e?style=flat-square)](https://amazonappdev2026.devpost.com/) [![Stack](https://img.shields.io/badge/Next.js%2016%20%C2%B7%20Bun-1e293b?style=flat-square)](#run-it) [![License: MIT](https://img.shields.io/badge/license-MIT-1e293b?style=flat-square)](LICENSE)
 
-| | |
-|---|---|
-| Track | Ring (business systems / caretaking) |
-| Deadline | Fri 23 Oct 2026 12:00 PDT = Sat 24 Oct 01:00 Dhaka. Internal wall: 21 Oct |
-| Judging | Pass/fail viability, then 4 equal criteria. Friction log = up to +10% |
-| Demo | Ring Playground simulator is allowed by the rules |
-| Repo rule | Must call the Ring API at runtime. Public + licence, or private + shared with testing@devpost.com and 6 Amazon reviewers |
+### [▶ Watch the demo](https://youtu.be/vSqTdbO6Nyo)
 
-## Ring API facts we checked (Ring developer console, from 2026-09-29)
+Free · No database · Next.js 16 + TypeScript + Tailwind 4
 
-- Playground token: 30 min, scope `ava.v1:read` only. `GET api.amazonvision.com/v1/devices` returns 1 simulated device.
-- Sandbox live-view sims: Package, Vehicle, Motion. `button_press` is in the docs but cannot be tested in the sandbox.
-- No lock / access-control endpoint anywhere.
-- Sandbox video: was black on most runs from about 15:30 to 16:15 UTC on 2026-09-29 (DELETE session and /metrics returned 503), reliable again from about 16:20 UTC - cause unknown: a temporary Ring-side fault, or stale page state cleared by a reload. Not a per-token rule. When recording: reload, fresh token, one clip per take. Credits (CC BY 4.0) if shown: Package = YouTube user frollard, Motion = Vimeo user Michael Black.
-- Event History works in the sandbox: `GET /v1/history/devices/{id}/events` returns `history-events` (attributes, relationships, meta). Live run 2026-10-06: 14 `on_demand` (live-view) events, and every `event_types` filter returned the same 14 rows - the sandbox ignores the filter.
-- Real event types (console session): webhook `motion_detected` (sub_type motion/human/vehicle/other_motion), `button_press`, `contact_sensor_faulted/cleared`. History: `GET /v1/history/devices/{id}/events?event_types=ding,motion.vehicle`. There is NO package event in the API docs.
-- Calls must be server-to-server (CORS blocks browsers).
-- Real app tokens (access ~4h, refresh ~30d) need Create app: 4 HTTPS endpoints, privacy policy, ToS, ID verification. Skipped unless needed.
-- Sample: github.com/AmazonAppDev/ring-api-helloworld (Next.js 15 + Python).
+<br>
+
+<img src="docs/shots/1440-light.png" alt="GateLog's report for one day: one incident (gate left open 25 minutes), counts of events, people, vehicles and visitors, an hourly chart, flagged events, visitors at the door, and the full timeline" width="720">
+
+</div>
+
+<br>
+
+> **Hackathon entry.** I built it in October 2026 for the Ring track of [Build, Ship, Shape: Amazon Developer Hackathon](https://amazonappdev2026.devpost.com/). It works end to end, but it's a demo, not a finished product. The day in the screenshot is scripted demo data, and the page says so.
+
+## Why I built this
+
+A housing society or an office has a gate, and a management committee that wants to know what happened at it. Who came, when, and was the gate left open at night.
+
+A Ring camera already sees all of that. So I took its events (motion, people, vehicles, doorbell presses, the gate sensor) and turned them into one daily report the committee can read or print.
+
+It only reads events. It doesn't open or lock anything, because the Ring API has no lock endpoint. And Ring reports no package events, so the report never claims a delivery.
+
+## A quick look
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/shots/1440-dark.png" alt="The same report in the dark theme"><br>
+      <b>Light and dark.</b> The same report in both themes, and it fits a phone screen too.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/shots/print-a4.png" alt="The report laid out for an A4 page"><br>
+      <b>Prints on A4.</b> One button, ready for the committee meeting.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <img src="docs/shots/live-2026-09-29.png" alt="A report built from real Ring Playground events: 14 live-view events"><br>
+      <b>Real Ring data.</b> A day pulled live from the Ring API sandbox.
+    </td>
+  </tr>
+</table>
+
+## Highlights
+
+- 🚪 **Gate left open**: flags the gate when it stays open 10 minutes or more.
+- 🔔 **Visitors**: a person seen, then the doorbell pressed within 2 minutes, counts as a visitor at the door.
+- 🌙 **Night activity**: any person or vehicle between 22:00 and 06:00 is flagged.
+- 📊 **One page per day**: counts, an hourly chart, flagged events and the full timeline. Pick any date.
+- 🔐 **Signed webhook**: Ring webhooks are checked with HMAC-SHA256 before they are stored.
+- 🏷️ **Honest about demo data**: replayed events are tagged, and the page says "Demo data" so they are never shown as real traffic.
+- 🖨️ **Print**: one click, laid out for A4.
+- 📱 **Any screen**: checked at 390 px and 1440 px, in light and dark.
 
 ## Run it
 
-Needs bun 1.4+ (and Node 24 for Next.js).
+You need Bun 1.4+ and Node 24.
 
 ```
 bun install
 cp .env.example .env.local          # RING_MODE=replay works with no token
 bun run build
 RING_WEBHOOK_SECRET=demo-local-secret bun run start -p 3100
+
 # second terminal: send one scripted gate day through the signed webhook
 RING_WEBHOOK_SECRET=demo-local-secret bun run replay:day -- --day 2026-10-06 --url http://localhost:3100/api/ring/webhook
-# open http://localhost:3100/?day=2026-10-06
+
+# then open http://localhost:3100/?day=2026-10-06
 ```
 
-- `RING_MODE=live` + `RING_TOKEN=<Playground token>` calls the real Ring API (`/v1/devices`, `/v1/history/devices/{id}/events`).
-- `RING_MODE=record` does the same and saves each response to `fixtures/recorded/`, so `replay` can run later with no token.
-- `POST /api/ring/webhook` takes Ring webhook payloads, checks `X-Signature` (HMAC-SHA256 of the raw body). `POST /api/ring/sync` pulls event history (needs `x-sync-key` in production).
-- Replayed demo events are tagged `replay` and the page says "Demo data" - they are never shown as real gate traffic.
-- Tests: `bun test`. Plan: `docs/PLAN.md`. Ring API facts: `docs/ring-api-spec.md`.
-- Demo video: https://youtu.be/vSqTdbO6Nyo - a real screen recording: a clip played on the Ring Playground camera becomes a new live-view row in GateLog, pulled from the Ring API. The first cut was made with [video-kit](https://github.com/joyahmed/video-kit) (open source, MIT) from `video/shots.mjs`.
+Three modes, set with `RING_MODE`:
 
-![Report, desktop](docs/shots/1440-light.png)
+| Mode | What it does |
+|---|---|
+| `replay` | Uses saved responses. No token needed. |
+| `live` | Calls the real Ring API (`/v1/devices`, `/v1/history/devices/{id}/events`). Needs `RING_TOKEN`. |
+| `record` | Same as `live`, and saves each response to `fixtures/recorded/` so `replay` can use it later. |
 
-## Status
+Two endpoints:
 
-- 2026-10-06: Gate 2 loop works with replayed data: event -> signed webhook -> store -> report on screen. 70 tests pass.
-- 2026-10-06: live sandbox run done (1 device, 14 real events), real responses saved in `fixtures/recorded/`. Sandbox ignores `event_types` - handled.
-- 2026-10-06: demo video v1 cut (1:45, captions only), kept outside the repo in `../ring-gatelog-video/`.
-- 2026-10-22: demo video re-recorded with live footage: Playground clips (Package, Vehicle, Motion) logged by Ring as `on_demand` history rows and synced into GateLog in live mode within about a minute.
+- `POST /api/ring/webhook` takes Ring webhook payloads and checks the `X-Signature` header.
+- `POST /api/ring/sync` pulls event history from Ring. In production it needs the `x-sync-key` header.
 
-Friction log: `docs/friction-log.md`. The earlier AWS CDS idea was dropped (needs a registered company and a Facebook business profile).
+Tests: `bun test`.
+
+## Watch it
+
+The demo video is a real screen recording: a clip played on the Ring Playground camera shows up as a new row in GateLog, pulled from the Ring API: [youtu.be/vSqTdbO6Nyo](https://youtu.be/vSqTdbO6Nyo). More of what I build: [youtube.com/@joysbuilds](https://www.youtube.com/@joysbuilds).
+
+## What I learned about the Ring API
+
+<details>
+<summary><b>Notes from building against the sandbox</b> (click to open)</summary>
+
+- A Playground token lasts 30 minutes, with read-only scope. `GET /v1/devices` returns one simulated device.
+- Calls must go server to server. CORS blocks them from a browser.
+- Event history works in the sandbox, but it ignores the `event_types` filter: every filter returned the same rows. GateLog handles that.
+- Real event types: `motion_detected` (person, vehicle, other motion), `button_press`, and the contact sensor's `faulted` / `cleared`. There is no package event.
+- There is no lock or access-control endpoint anywhere.
+- The sandbox's live-view video was black for a while on one evening, then reliable again. Cause unknown.
+
+The full notes are in [docs/ring-api-spec.md](docs/ring-api-spec.md), and every snag I hit is in the [friction log](docs/friction-log.md). The build plan is in [docs/PLAN.md](docs/PLAN.md).
+
+</details>
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+
+I build tools I use myself, from Bangladesh. This one started as a hackathon entry, and I'd love to see it guard a real gate.<br>
+Found a bug or want something? [Open an issue](https://github.com/joyahmed/ring-gatelog/issues).
+
+**Joy**
+
+</div>
